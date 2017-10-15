@@ -13,7 +13,7 @@
 
 upstream app {
     # Path to Unicorn SOCK file, as defined previously
-    server unix:/opt/app/7-compute-engine/shared/sockets/unicorn.sock fail_timeout=0;
+    server unix:/opt/app/shared/sockets/unicorn.sock fail_timeout=0;
 }
 
 server {
