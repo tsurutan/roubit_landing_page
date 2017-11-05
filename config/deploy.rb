@@ -4,8 +4,8 @@ set :application, "roubit_landing_page"
 set :repo_url, "git@github.com:tsurutan/roubit_landing_page.git"
 
 
-set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
-set :unicorn_config_path, "/var/www/roubit_landing_page/current/config/unicorn.conf"
+set :unicorn_pid, -> { "/var/www/roubit_landing_page/shared/pids/unicorn.pid" }
+set :unicorn_config_path, "/var/www/roubit_landing_page/current/config/unicorn.rb"
 
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -26,19 +26,8 @@ namespace :deploy do
     end
   end
 
-  task :start do
-    on roles(:app) do
-      execute "pwd"
-      within "/var/www/roubit_landing_page/current/" do
-        execute "pwd"
-        execute "bundle exec unicorn -c #{current_path}/config/unicorn.conf -D"
-      end
-    end
-  end
-
   task :restart do
     invoke 'unicorn:restart'
   end
-
   before :starting, :confirm
 end
