@@ -13,12 +13,12 @@ stdout_path "#{app_dir}/log/unicorn.stdout.log"
 
 pid "#{shared_dir}/pids/unicorn.pid"
 
-before_fork do |server, worker|
-  defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.connection.disconnect!
-end
-
-after_fork do |server, worker|
-  defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.establish_connection
-end
+# before_fork do |server, worker|
+#   defined?(ActiveRecord::Base) and
+#       ActiveRecord::Base.connection.disconnect!
+# end
+#
+# after_fork do |server, worker|
+#   defined?(ActiveRecord::Base) and
+#       ActiveRecord::Base.establish_connection
+# end
