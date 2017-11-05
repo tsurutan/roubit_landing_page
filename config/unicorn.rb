@@ -1,5 +1,5 @@
 app_dir = File.expand_path("../..", __FILE__)
-shared_dir = "#{app_dir}/../shared"
+shared_dir = "/var/www/roubit_landing_page/shared"
 working_directory app_dir
 
 worker_processes 1
