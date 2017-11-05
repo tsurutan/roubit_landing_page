@@ -24,6 +24,19 @@ namespace :deploy do
       invoke 'deploy'
     end
   end
+  
+  task :start do
+    run "bundle exec unicorn -c #{current_path}/config/unicorn.conf -D"
+  end
+
+  task :stop do
+    run "kill -QUIT `cat #{current_path}/tmp/pids/unicorn.pid`"
+  end
+
+  task :restart do
+    run "kill -USR2 `cat #{current_path}/tmp/pids/unicorn.pid`"
+    run "kill -QUIT `cat #{current_path}/tmp/pids/unicorn.pid.oldbin`"
+  end
 
   before :starting, :confirm
 end
