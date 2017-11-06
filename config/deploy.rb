@@ -16,7 +16,7 @@ set :rbenv_ruby, '2.3.0'
 set :rbenv_prefix, "#{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w(rake gem bundle ruby rails)
 set :rbenv_roles, :all # default value
-
+set :bundle_env_variables, { nokogiri_use_system_libraries: 1 }
 # Rails の設定 see: https://github.com/capistrano/rails/
 set :rails_env, 'production'
 
