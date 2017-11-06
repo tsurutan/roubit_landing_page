@@ -7,6 +7,19 @@ set :repo_url, "git@github.com:tsurutan/roubit_landing_page.git"
 set :unicorn_pid, -> { "/var/www/roubit_landing_page/shared/pids/unicorn.pid" }
 set :unicorn_config_path, "/var/www/roubit_landing_page/current/config/unicorn.rb"
 
+set :branch, ENV['BRANCH'] || 'master'
+set :pty, true # タスク内でsudoするために必要
+
+set :rbenv_type, :user # :system or :user
+set :rbenv_path, '/usr/local/rbenv'
+set :rbenv_ruby, '2.3.0'
+set :rbenv_prefix, "#{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_map_bins, %w(rake gem bundle ruby rails)
+set :rbenv_roles, :all # default value
+
+# Rails の設定 see: https://github.com/capistrano/rails/
+set :rails_env, 'production'
+
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 namespace :deploy do
@@ -27,7 +40,9 @@ namespace :deploy do
   end
 
   task :restart do
-    invoke 'unicorn:restart'
+    on roles(:app) do
+      execute 'cd /var/www/roubit_landing_page/current ; bundle install'
+    end
   end
   before :starting, :confirm
 end

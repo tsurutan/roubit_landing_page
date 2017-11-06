@@ -2,6 +2,9 @@ require "capistrano/setup"
 require "capistrano/deploy"
 require "capistrano/scm/git"
 require 'capistrano3/unicorn'
+require 'capistrano/rbenv'
+require 'capistrano/rails'
+require 'capistrano3/unicorn'
 
 install_plugin Capistrano::SCM::Git
 
