@@ -39,10 +39,10 @@ namespace :deploy do
     end
   end
 
-  task :restart do
-    on roles(:app) do
-      execute 'cd /var/www/roubit_landing_page/current ; bundle install'
-    end
-  end
+  # task :restart do
+  #   on roles(:app) do
+  #     execute 'cd /var/www/roubit_landing_page/current ; bundle install'
+  #   end
+  # end
   before :starting, :confirm
 end
